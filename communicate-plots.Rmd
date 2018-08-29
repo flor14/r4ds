@@ -133,8 +133,7 @@ ggplot(millas, aes(motor, autopista, colour = clase)) +
     data = clase_promedio,
     size = 6,
     label.size = 0,
-    segment.color = NA
-  ) +
+    segment.color = NA) +
   geom_point() +
   theme(legend.position = "none")
 ```
