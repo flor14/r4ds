@@ -179,7 +179,6 @@ En estos ejemplos, separé manualmente la etiqueta en líneas usando "\n". Otra 
 Ten en cuenta el uso de `hjust` y `vjust` para controlar la alineación de la etiqueta. La figura \@ref(fig:just) muestra las nueve combinaciones posibles.
 
 ```{r just, echo = FALSE, fig.cap = "Las nueve combinaciones posibles con `hjust` y `vjust`.", fig.asp = 0.5, fig.width = 4.5, out.width = "60%"}
-
 vjust <- c(bottom = 0, center = 0.5, top = 1)
 hjust <- c(left = 0, center = 0.5, right = 1)
 
