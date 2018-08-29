@@ -23,6 +23,7 @@ Si ejecutas este código y recibes el mensaje de error "no hay ningún paquete l
 
 ```{r eval = FALSE}
 install.packages("tidyverse")
+
 library(tidyverse)
 ```
 
@@ -123,8 +124,8 @@ ggplot() +
 El mapeo de las propiedades estéticas en tus gráficos a las variables en tu conjunto de datos te permite comunicar información de los mismos.  Por ejemplo, puedes asignar los colores de tus puntos a la variable `clase` para revelar la clase de cada automóvil.
 
 ```{r}
-ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy, color = class))
+ggplot(data = millas) + 
+  geom_point(mapping = aes(x = motor, y = autopista, color = clase))
 ```
 
 (Si prefieres el inglés británico, como Hadley, puedes usar `colour` en lugar de `color`).
@@ -207,7 +208,7 @@ ggplot(shapes, aes(x, y)) +
     
 4.  ¿Qué ocurre si asignas o mapeas la misma variable a múltiples estéticas?
 
-5.  ¿Qué hace la estética `stroke '? ¿Con qué formas trabaja? (Sugerencia: consultar `?geom_point`)
+5.  ¿Qué hace la estética `stroke`? ¿Con qué formas trabaja? (Sugerencia: consultar `?geom_point`)
 
 6.  ¿Qué ocurre si se asigna o mapea una estética a algo diferente del nombre de una variable, como ser `aes (color = motor <5)`?
 
