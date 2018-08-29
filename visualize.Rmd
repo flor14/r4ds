@@ -2,7 +2,7 @@
 
 ## Introducción
 
->"Un simple gráfico brinda más información a la mente del analista de datos
+>"Un simple gráfico ha brindado más información a la mente del analista de datos
 >que cualquier otro dispositivo". --- John Tukey
 
 En este capítulo aprenderás cómo visualizar datos usando el paquete **ggplot2**. De los muchos sistemas que posee R para hacer gráficos, **ggplot2** es uno de los más elegantes y versátiles. Esto se debe a que implementa  un sistema coherente para describir y construir gráficos, conocido como la __gramática de gráficos__. Con **ggplot2** puedes hacer más cosas en menor tiempo, aprendiendo un único sistema y aplicándolo en muchos lugares
