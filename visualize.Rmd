@@ -426,18 +426,23 @@ Luego, ejecuta el código en R y verifica tus predicciones.
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
      geom_point() + 
       geom_smooth(se = FALSE)
+      
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
       geom_smooth(aes(group = traccion),se = FALSE)+
       geom_point() 
+      
     ggplot(data = millas, mapping = aes(x = motor, y = autopista, color = traccion)) +
       geom_point() +
       geom_smooth(se = FALSE)
+      
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
       geom_point(aes(color = traccion) +
       geom_smooth(se = FALSE)
+      
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
       geom_point(aes(color = traccion) +
-     geom_smooth(aes(linetype = traccion),se = FALSE)
+     geom_smooth(aes(linetype = traccion), se = FALSE)
+     
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
       geom_point(size = 4, colour = "white") +
       geom_point(aes(colour = traccion))  
@@ -538,8 +543,10 @@ En otras palabras, ¿cuál es el problema con estos dos gráficos?
 
    
     ```{r, eval = FALSE}
+    
     ggplot(data = diamantes) + 
       geom_bar(mapping = aes(x = corte, y = ..prop..))
+      
     ggplot(data = diamantes) + 
       geom_bar(mapping = aes(x = corte, fill = color, y = ..prop..))
     ```
@@ -550,8 +557,10 @@ En otras palabras, ¿cuál es el problema con estos dos gráficos?
 Hay una pieza más de magia asociada con los gráficos de barras. Puede colorear un gráfico de barras usando la estética de `color` o, tal vez con el más útil `fill`:
 
 ```{r out.width = "50%", fig.align = "default"}
+
 ggplot(data = diamantes) + 
   geom_bar(mapping = aes(x = corte, colour = corte))
+  
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = corte, fill = corte))
 ```
@@ -569,8 +578,10 @@ El apilamiento se realiza automáticamente mediante el ajuste de posición espec
 
     
     ```{r out.width = "50%", fig.align = "default"}
+    
    ggplot(data = diamantes, mapping = aes(x = corte, fill = claridad)) + 
      geom_bar(alpha = 1/5, position = "identity")
+     
    ggplot(data = diamantes, mapping = aes(x = corte, colour = claridad)) + 
      geom_bar(fill = NA, position = "identity")
     ```
@@ -633,8 +644,10 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
 *   `coord_flip()` cambia los ejes x e y. Esto es útil (por ejemplo), si quieres diagramas de caja horizontales. También es útil para etiquetas largas: es difícil ajustarlas sin superposición en el eje x.
     
     ```{r fig.width = 3, out.width = "50%", fig.align = "default"}
+    
     ggplot(data = millas, mapping = aes(x = clase, y = autopista)) + 
        geom_boxplot()
+       
     ggplot(data = millas, mapping = aes(x = clase, y = autopista))  + 
       geom_boxplot() +
       coord_flip()
