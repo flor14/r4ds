@@ -197,6 +197,7 @@ ggplot(df, aes(x, y)) +
   geom_text(aes(label = label, hjust = hj, vjust = vj), size = 4) +
   labs(x = NULL, y = NULL) 
 ```
+```
 
 Recuerda que además de `geom_text()`, en ggplot2 tienes  muchos otros geoms disponibles para ayudar a agregar notas a tu gráfico . Algunas ideas:
 
