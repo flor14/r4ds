@@ -353,7 +353,7 @@ ggplot(data = millas) +
   geom_smooth(mapping = aes(x = motor, y = autopista, group = traccion))
   
 ggplot(data = millas) + 
-  geom_smooth(mapping = aes(x = motor, y = autopista, color = traccion), show.legend = FALSE))
+  geom_smooth(mapping = aes(x = motor, y = autopista, color = traccion), show.legend = FALSE)
 ```
 
 Para mostrar múltiples geoms en el mismo gráfico, agrega varias funciones geom a `ggplot()`:
@@ -361,7 +361,7 @@ Para mostrar múltiples geoms en el mismo gráfico, agrega varias funciones geom
 ```{r, message = FALSE}
 ggplot(data = millas) + 
   geom_point(mapping = aes(x = motor, y = autopista)) +
-  geom_smooth(mapping = aes(x = motor, y = autopista)
+  geom_smooth(mapping = aes(x = motor, y = autopista))
 ```
 
 Esto introduce sin embargo cierta duplicación en nuestro código. Imagina que deseas cambiar el eje y para mostrar `ciudad` en lugar de `autopista`. Necesitarías cambiar la variable en dos lugares, y podrías olvidarte de actualizar uno. Puedes evitar este tipo de repetición pasando un conjunto de mapeos a `ggplot()`. **ggplot2** tratará estos mapeos como mapeos globales que se aplican a cada geom en el gráfico. En otras palabras, este código producirá la misma gráfica que el código anterior:
@@ -386,7 +386,6 @@ La misma idea se puede emplear para especificar distintos conjuntos de datos (`d
 ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
  geom_point(mapping = aes(color = clase)) + 
   geom_smooth(data = filter(millas, clase == "subcompacto"), se = FALSE)
-
 ```
 
 (Aprenderás cómo funciona `filter()` en el próximo capítulo: por ahora, solo recuerda que este comando selecciona los automóviles subcompactos).
@@ -425,11 +424,11 @@ Luego, ejecuta el código en R y verifica tus predicciones.
     
     ```{r echo = FALSE, fig.width = 3, out.width = "50%", fig.align = "default", message = FALSE}
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-     geom_point() + 
+      geom_point() + 
       geom_smooth(se = FALSE)
       
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-      geom_smooth(aes(group = traccion),se = FALSE)+
+      geom_smooth(aes(group = traccion), se = FALSE) +
       geom_point() 
       
     ggplot(data = millas, mapping = aes(x = motor, y = autopista, color = traccion)) +
@@ -437,12 +436,12 @@ Luego, ejecuta el código en R y verifica tus predicciones.
       geom_smooth(se = FALSE)
       
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-      geom_point(aes(color = traccion) +
+      geom_point(aes(color = traccion)) +
       geom_smooth(se = FALSE)
       
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-      geom_point(aes(color = traccion) +
-     geom_smooth(aes(linetype = traccion), se = FALSE)
+      geom_point(aes(color = traccion)) +
+      geom_smooth(aes(linetype = traccion), se = FALSE)
      
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
       geom_point(size = 4, colour = "white") +
@@ -455,7 +454,7 @@ A continuación, echemos un vistazo a un gráfico de barras. Los gráficos de ba
 
 ```{r}
 ggplot(data = diamantes) + 
-  geom_bar(mapping = aes(x = cortes))
+  geom_bar(mapping = aes(x = corte))
 ```
 
 En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje y  muestra recuento, ¡pero el recuento no es una variable en `diamantes`! ¿De dónde viene el recuento? Muchos gráficos, como los diagramas de dispersión, grafican los valores brutos de su conjunto de datos. Otros gráficos, como los gráficos de barras, calculan nuevos valores para presentar:
@@ -478,7 +477,7 @@ Por lo general puedes usar geoms y estadísticas de forma intercambiable. Por ej
 
 ```{r}
 ggplot(data = diamantes) + 
-  stat_count(mapping = aes(x = cortes))
+  stat_count(mapping = aes(x = corte))
 ```
 
 Esto funciona porque cada geom tiene una estadística predeterminada; y cada estadística tiene un geom predeterminado. Esto significa que generalmente puedes usar geoms sin preocuparte por la transformación estadística subyacente. Hay tres razones por las que podrías necesitar usar una estadística explícitamente:
@@ -551,18 +550,16 @@ En otras palabras, ¿cuál es el problema con estos dos gráficos?
     ggplot(data = diamantes) + 
       geom_bar(mapping = aes(x = corte, fill = color, y = ..prop..))
     ```
-  
 
 ## Ajustes de posición
 
 Hay una pieza más de magia asociada con los gráficos de barras. Puede colorear un gráfico de barras usando la estética de `color` o, tal vez con el más útil `fill`:
 
 ```{r out.width = "50%", fig.align = "default"}
-
 ggplot(data = diamantes) + 
   geom_bar(mapping = aes(x = corte, colour = corte))
   
-ggplot(data = diamonds) + 
+ggplot(data = diamantes) + 
   geom_bar(mapping = aes(x = corte, fill = corte))
 ```
 
@@ -576,32 +573,30 @@ ggplot(data = diamantes) +
 El apilamiento se realiza automáticamente mediante el ajuste de posición especificado por el argumento `position`. Si no deseas un gráfico de barras apiladas , puedes usar una de las otras tres opciones: `"identity"`, `"dodge"` o `"fill"`, del inglés *identidad*, *esquivar* y *llenar* respectivamente.
 
 *	`position = "identity"` colocará cada objeto exactamente donde cae en el contexto del gráfico. Esto no es muy útil al momento de graficar barras, porque las superpone. Para ver esa superposición, debemos hacer que las barras sean ligeramente transparentes al configurar alfa a un valor pequeño, o completamente transparente al establecer `fill = NA`.
-
     
-    ```{r out.width = "50%", fig.align = "default"}
-    
-   ggplot(data = diamantes, mapping = aes(x = corte, fill = claridad)) + 
-     geom_bar(alpha = 1/5, position = "identity")
+```{r out.width = "50%", fig.align = "default"}
+ggplot(data = diamantes, mapping = aes(x = corte, fill = claridad)) + 
+  geom_bar(alpha = 1/5, position = "identity")
      
-   ggplot(data = diamantes, mapping = aes(x = corte, colour = claridad)) + 
-     geom_bar(fill = NA, position = "identity")
-    ```
+ggplot(data = diamantes, mapping = aes(x = corte, colour = claridad)) + 
+  geom_bar(fill = NA, position = "identity")
+```
     
-   El ajuste de `posición = identity` es más útil para geoms 2-D, como puntos, donde es la opción predeterminada.
+El ajuste de `posición = identity` es más útil para geoms 2-D, como puntos, donde es la opción predeterminada.
    
 * `position = "fill"` funciona como el apilamiento, pero hace que cada conjunto de barras apiladas tenga la misma altura. Esto hace que sea más fácil comparar proporciones entre grupos.
 
-    ```{r}
-    ggplot(data = diamantes) + 
-      geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
-    ```
+```{r}
+ggplot(data = diamantes) + 
+  geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
+```
 
 * `position = "dodge"` coloca objetos superpuestos directamente uno al lado del otro. Esto hace que sea más fácil comparar valores individuales.
 
-    ```{r}
-    ggplot(data = diamantes) + 
-      geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
-    ```
+```{r}
+ggplot(data = diamantes) + 
+  geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
+```
 
 Hay otro tipo de ajuste que no es útil para gráficos de barras, pero puede ser muy útil para diagramas de dispersión. Recuerda nuestro primer diagrama de dispersión. ¿Notaste que la trama muestra solo 126 puntos, a pesar de que hay 234 observaciones en el conjunto de datos?
 
@@ -627,10 +622,10 @@ Para obtener más información sobre ajustes de posición, busca la página de a
 
 1.  ¿Cuál es el problema con este gráfico? ¿Cómo podrías mejorarlo?
 
-    ```{r}
-    ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
-      geom_point()
-    ```
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point()
+```
 
 2. ¿Qué parámetros de `geom_jitter()` controlan la cantidad de ruido?
 
